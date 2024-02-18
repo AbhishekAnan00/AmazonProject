@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin: 0;
+  padding: 0;
+}
+body{
+  overflow-x: hidden;
+  background-color: rgba(128, 128, 128, 0.089);
+}
+
+.bg-primary {
+  background-color: #F08804; 
+}
+.bg-secondary {
+  background-color: #0f1111;
+}
