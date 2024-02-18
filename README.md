@@ -1,8 +1,12 @@
-# React + Vite
+#work on amazon project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tech Used - React js , tailwind , firebase , razorpay .
 
-Currently, two official plugins are available:
+Feat Primary - login/logout authentication , order integration with payment gateway razorpay & user interaction store on firebase.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Feat - search function , all category wise , reset filteration , adding item in cart and manage their properties .
+
+style - Tailwind 
+
+https://github.com/AbhishekAnan00/AmazonProject/assets/156063395/44a21087-b843-4c40-8ba2-09ed868bf1a7
+
