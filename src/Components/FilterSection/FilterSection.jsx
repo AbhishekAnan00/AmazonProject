@@ -36,7 +36,7 @@ export const FilterSection = () => {
               value={text}
               onChange={updateFilterValue}
               placeholder="Search Products"
-              className="border-none outline-none p-[5px] w-60 rounded-lg cursor-pointer"
+              className="search-product border-none outline-none p-[5px] w-60 rounded-lg cursor-pointer sm:w-40 md:w-44 lg:w-52"
             />
           </form>
         </div>

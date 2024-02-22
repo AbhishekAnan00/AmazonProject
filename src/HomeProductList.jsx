@@ -53,25 +53,33 @@ export const HomeProductList = () => {
     },
   ];
 
-  return (<>
-    <div className="center-product grid grid-cols-4 p-8 absolute top-[350px] gap-4">
-      {HomeProductList.map((item) => {
-        return (
-          <div
-            key={item.id}
-            className="center-product-info flex flex-col justify-center p-8 h-80 w-66 mb-2 shadow-lg bg-white gap-2"
-          >
-            <p className="  text-{black} text-1xl font-bold">{item.title}</p>
-            <img
-              src={item.cover}
-              alt={item.title}
-              className="h-80 w-60 object-contain"
-            />
-            <Link to="/products"><p className=" text-teal-500 ">See more</p></Link>
-          </div>
-        );
-      })}
-    </div>
+  return (
+    <>
+      <div className="grid grid-cols-4 md:p-5 2xl:p-12 sm:grid-cols-3 md:grid-cols-4 absolute  2xl:top-[350px] xl:top-[250px] lg:top-[250px] md:top-[200px] sm:top-[120px] sm:gap-12 sm:p-8">
+        {HomeProductList.map((item) => {
+          return (
+            <div
+              key={item.id}
+              className="flex flex-col justify-center sm:h-[100px] sm:w-[100px] md:h-[160px] md:w-[120px] xl:w-[220px] xl:h-[250px] 2xl:w-[300px]
+              2xl:h-[300px] md:gap-1 sm:p-2 sm:gap-0 md:p-2 lg:p-2 lg:h-[200px] lg:w-[200px] h-80 w-66 sm:mb-0 mb-2 shadow-lg bg-white 2xl:p-5 gap-2"
+            >
+              <p className="text-{black} sm:text-[5px] sm:font-normal  md:text-[8px] md:font-bold lg:text-[10px] xl:text-[14px]">
+                {item.title}
+              </p>
+              <img
+                src={item.cover}
+                alt={item.title}
+                className="sm:w-full sm:h-40 2xl:w-80 2xl:h-80 object-contain"
+              />
+              <Link to="/products">
+                <p className=" text-teal-500 sm:text-[8px] md:text-[10px] lg:text-[14px] xl:text-[16px]">
+                  See more
+                </p>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </>
   );
 };

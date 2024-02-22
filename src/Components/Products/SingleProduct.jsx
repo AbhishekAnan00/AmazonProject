@@ -35,14 +35,14 @@ export const SingleProduct = () => {
   }
   return (
     <Layout>
-      <div className="container p-10">
-        <div className="grid grid-cols-2">
+      <div className="sm:p-2">
+        <div className="sm:grid sm:grid-rows-2">
           {/* product image */}
-          <div className="product-img">
+          <div className="">
             <Images Imgs={image} />
           </div>
           {/* product-data */}
-          <div className="product-data ml-10">
+          <div className="single-product-data">
             <b>{name}</b>
             <Stars stars={stars} reviews={reviews} />
             <p className="product-data-price">

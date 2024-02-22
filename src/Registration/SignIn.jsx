@@ -25,7 +25,7 @@ export const SignIn = () => {
       localStorage.setItem("user", JSON.stringify(result));
       navigation("/");
     } catch (error) {
-      alert("error 404");
+      alert("No account exits , Create account first !");
     }
   };
   return (

@@ -44,8 +44,8 @@ export const Cart = () => {
       }),
     };
     var options = {
-      key: "rzp_test_RuEELZW2EUDlp7",
-      key_secret: "OAVPg05b6R6DM7POKwp63hMt",
+      key: import.meta.env.VITE_API_KEY_RAZORPAY,
+      key_secret: import.meta.env.VITE_SECRET_KEY_RAZORPAY,
       amount: parseInt(totalPrice),
       currency: "INR",
       order_receipt: "order_rcptid_" + name,
@@ -87,15 +87,15 @@ export const Cart = () => {
   return (
     <>
       <Layout>
-        <div className="cartitem bg-white w-3/4 m-6 pl-6 shadow-lg">
-          <p className="font-semibold ml-10 text-2xl">Shopping Cart</p>
+        <div className="cartitem-cart bg-white shadow-lg sm:mt-60">
+          <p className="font-semibold text-2xl">Shopping Cart</p>
           {cart.map((curElem) => {
             return <CartItem key={curElem.id} {...curElem} />;
           })}
           <hr className="mt-10" />
         </div>
         <hr className="mt-4" />
-        <div className=" w-3/4 flex justify-between ml-10">
+        <div className=" w-full flex justify-around ">
           <Link to="/products">
             <button className="border border-yellow-400 bg-primary text-black hover:opacity-75 transition-opacity rounded-2xl font-semibold p-[6px] w-42 mt-5 cursor-pointer ">
               continue shopping
@@ -108,7 +108,7 @@ export const Cart = () => {
             Clear Cart
           </button>
         </div>
-        <div className="price-section w-60 absolute right-10 top-24 bg-white shadow-lg p-4 ">
+        <div className="sm:absolute sm:top-20 sm:bg-white sm:shadow-lg p-4 sm:w-full">
           <div className="flex justify-between mb-1">
             <p>subtotal:</p>
             <p>

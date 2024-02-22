@@ -6,6 +6,7 @@ import {AppProvider} from "./Context/ProductContext.jsx";
 import {FilterProvider} from './Context/FilterContext.jsx'
 import { CartContextProvider } from "./Context/CartContext.jsx";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>
       <AppProvider>

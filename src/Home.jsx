@@ -42,7 +42,7 @@ export const Home = () => {
       <Layout>
         <div className="home">
           <div
-            className="left-arrow absolute top-[300px] text-4xl"
+            className="left-arrow absolute top-[300px] sm:top-[100px] md:top-[150px] xl:top-[220px] lg:top-[200px] text-4xl"
             onClick={prevSlide}
           >
             <MdOutlineKeyboardArrowLeft />
@@ -55,7 +55,7 @@ export const Home = () => {
             })}
           </div>
           <div
-            className="right-arrow relative top-[-300px] left-[97%] text-4xl"
+            className="right-arrow absolute top-[300px] sm:top-[100px] md:top-[150px] lg:top-[200px] xl:top-[220px] xl:left-[97%] md:left-[95%] sm:left-[93%] left-[97%] text-4xl"
             onClick={nextSlide}
           >
             <MdKeyboardArrowRight />

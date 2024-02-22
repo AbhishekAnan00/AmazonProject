@@ -34,17 +34,17 @@ export const Header = () => {
   };
   return (
     <div className="header">
-      <nav className="flex justify-evenly  items-center bg-secondary text-white p-1">
+      <nav className="flex justify-evenly items-center bg-secondary text-white p-1">
         <div>
           <Link to="/">
             <img
               src={amazon_logo}
               alt="logo"
-              className=" h-16 w-28 hover:border cursor-pointer"
+              className="nav-logo h-16 sm:hidden md:block lg:block xl:block 2xl:block hover:border cursor-pointer"
             />
           </Link>
         </div>
-        <div className="flex flex-col hover:border">
+        <div className="nav-location flex flex-col hover:border sm:hidden md:hidden lg:hidden xl:block 2xl:block ">
           <div>
             <p className="text-[12px]">Delivery</p>
           </div>
@@ -55,9 +55,9 @@ export const Header = () => {
             <p className="font-bold">india</p>
           </div>
         </div>
-        <div className="flex border-2 rounded-lg border-transparent hover:border-orange-400">
+        <div className="nav-search flex outline-none border-2 rounded-lg bg-white border-transparent hover:border-orange-400">
           <select
-            className="h-10 bg-slate-200 font-poppin text-black outline-none border-none rounded-tl-md rounded-bl-md p-2 w-14 cursor-pointer"
+            className="nav-select h-full  p-2 w-14 bg-slate-200 font-poppin text-black outline-none border-none rounded-tl-md rounded-bl-md sm:hidden md:block lg:block xl:block 2xl:block  cursor-pointer"
             onClick={updateFilterValue}
             name="company"
           >
@@ -77,14 +77,14 @@ export const Header = () => {
             value={text}
             onChange={updateFilterValue}
             placeholder="Search Amazon.in"
-            className=" w-[500px] h-10 font-semibold font-poppin text-black pl-2 outline-none border-none cursor-pointer"
+            className="sm:w-100% md:w-[300px] lg:w-[400px] xl:w-[400px] 2xl:w-[500px] sm:rounded-tl-md sm:rounded-bl-md font-poppin text-black pl-2 outline-none border-none cursor-pointer"
           />
 
-          <div className=" bg-orange-300 h-10 w-10 flex items-center justify-center text-2xl text-black rounded-tr-md rounded-br-md cursor-pointer">
+          <div className="nav-search-icon w-10 bg-orange-300  flex items-center justify-center text-2xl text-black rounded-tr-md rounded-br-md sm:rounded-tl-md sm:rounded-bl-md md:rounded-tl-md md:rounded-bl-md 2xl:rounded-tl-none 2xl:rounded-bl-none xl:rounded-tl-none xl:rounded-bl-none cursor-pointer">
             <IoSearch />
           </div>
         </div>
-        <div className="hover:border flex gap-2">
+        <div className="hover:border flex gap-2 sm:hidden md:hidden lg:hidden xl:hidden 2xl:flex">
           <img
             src="https://www.sic-info.org/wp-content/uploads/2014/01/in.png"
             alt="flag"
@@ -92,7 +92,7 @@ export const Header = () => {
           <p className="font-bold">EN</p>
         </div>
 
-        <div className="hover:border cursor-pointer">
+        <div className="nav-logout hover:border sm:text-sm md:text-md lg:text-md xl:text-md 2xl:text-lg cursor-pointer">
           {user ? (
             <p onClick={logout} className="logout">
               Hello , Logout
@@ -104,20 +104,24 @@ export const Header = () => {
               </p>
             </Link>
           )}
-          <p className="font-bold">Acount & lists</p>
+          <p className="font-bold sm:hidden md:hidden lg:block xl:block 2xl:block">
+            Account & lists
+          </p>
         </div>
         <Link to="/order">
-          <div className="hover:border cursor-pointer">
+          <div className="nav-order hover:border sm:hidden md:hidden lg:block xl:block 2xl:block 2xl:text-lg cursor-pointer">
             <p className="font-bold">Return</p>
             <p>& Orders</p>
           </div>
         </Link>
-        <div className="hover:border flex items-center cursor-pointer">
+        <div className="nav-cart hover:border flex items-center cursor-pointer">
           <Link to="/cart">
-            <LiaShoppingCartSolid className="text-5xl cursor-pointer" />
+            <LiaShoppingCartSolid className="nav-cart-icon 2xl:text-5xl sm:text-4xl md:text-2xl lg:text-3xl xl:text-4xl cursor-pointer" />
           </Link>
-          <p className="mt-4 font-bold">Cart </p>
-          <p className="relative top-[-12px] right-8 text-2xl text-orange-400 ">
+          <p className="2xl:mt-4 sm:mt-1 md:mt-2 lg:mt-3 xl:mt-4 font-bold sm:text-sm md:text-md lg:text-lg text-xl-lg">
+            Cart{" "}
+          </p>
+          <p className="cart-count relative top-[-12px] right-8 2xl:text-xl sm:text-xl md:text-md lg:text-lg xl:text-lg  text-orange-400 ">
             {totalItem}
           </p>
         </div>

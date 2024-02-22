@@ -5,8 +5,8 @@ import  {getFirestore}  from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBdSPLk2NRyKC0F2CTbNFdJwkLLEhIpRLg",
-  authDomain: "project-ac703.firebaseapp.com",
+  apiKey:  import.meta.env.VITE_API_KEY,
+  authDomain: import.meta.env.VITE_BASE_URL,
   projectId: "project-ac703",
   storageBucket: "project-ac703.appspot.com",
   messagingSenderId: "519647312934",

@@ -9,15 +9,15 @@ export const CartItem = ({ id, name, image, price, amount, color }) => {
 
   return (
     <>
-      <div className="cartitem grid grid-cols-3 w-[900px] ml-10 mt-5 border bg-white">
-        <figure>
-          <img src={image} alt={id} className=" h-40 " />
+      <div className="cartitem sm:gap-4 sm:mb-6 sm:flex sm:w-full sm:border sm:bg-white sm:h-40 md:h-40 md:grid md:grid-cols-3">
+        <figure className="cartitem-img">
+          <img src={image} alt={id} className="sm:w-42 md:w-52" />
         </figure>
-        <div className="mt-5 ml-10 ">
-          <p className="font-semibold">{name}</p>
+        <div className="cartitem-data">
+          <p className="font-semibold sm:mb-2">{name}</p>
           <p>color:</p>
           <button
-            className=" w-5 rounded-full h-5 "
+            className=" w-5 rounded-full h-5 sm:mb-2"
             style={{
               backgroundColor: color,
               color: color,
@@ -34,11 +34,8 @@ export const CartItem = ({ id, name, image, price, amount, color }) => {
             setIncrease={() => setIncrement(id)}
           />
         </div>
-        <div>
-          <MdDelete
-            className="text-2xl mt-2 relative -right-[200px] "
-            onClick={() => removeItem(id)}
-          />
+        <div className="cartitem-delete">
+          <MdDelete className="sm:text-2xl" onClick={() => removeItem(id)} />
         </div>
       </div>
     </>
