@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 
 export const ListView = ({ products }) => {
   return (
-    <div className="listview lg:mt-10 lg:mr-20 md:mt-12">
+    <div className="listview mt-4 lapi:w-[800px] phone-sm:w-[180px]">
       {products.map((curElem) => {
         const { id, name, price, image, description } = curElem;
         return (
           <div
             key={curElem.id}
-            className="md:ml-44 md:mb-5 sm:w-[260px] sm:ml-24 sm:mt-5 border border-black-500 items-center md:flex md:flex-col md:w-80 lg:flex lg:flex-row lg:w-[500px] xl:w-[800px] 2xl:w-[800px]"
+            className="border border-black-500 items-center flex flex-row mb-6"
           >
             <figure>
               <img src={image} alt={name} />

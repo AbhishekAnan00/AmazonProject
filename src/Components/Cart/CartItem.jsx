@@ -9,33 +9,34 @@ export const CartItem = ({ id, name, image, price, amount, color }) => {
 
   return (
     <>
-      <div className="cartitem sm:gap-4 sm:mb-6 sm:flex sm:w-full sm:border sm:bg-white sm:h-40 md:h-40 md:grid md:grid-cols-3">
+      <div className="cartitem flex gap-60 mt-8 phone-sm:flex phone-sm:mt-5 phone-sm:gap-6 phone-md:gap-8 phone-lg:gap-10 phone-xl:16 lapi:gap-60 lapi:mt-8 lapi:flex">
         <figure className="cartitem-img">
-          <img src={image} alt={id} className="sm:w-42 md:w-52" />
+          <img src={image} alt={id} className="h-60 phone-sm:h-20 lapi:h-60"/>
         </figure>
-        <div className="cartitem-data">
-          <p className="font-semibold sm:mb-2">{name}</p>
-          <p>color:</p>
+        <div className="cartitem-data text-2xl phone-sm:text-sm lapi:text-2xl">
+          <p className="font-semibold">{name}</p>
+          <p className="mt-4 phone-sm:mt-1">color:</p>
           <button
-            className=" w-5 rounded-full h-5 sm:mb-2"
+            className="w-5 rounded-full h-5 mt-4 phone-sm:mt-1 lapi:mt-4"
             style={{
               backgroundColor: color,
               color: color,
             }}
           ></button>
 
-          <p>
+          <p className="mt-4 phone-sm:mt-1 lapi:mt-4">
             <FormatPrice price={price} />
           </p>
-
+          <p className="mt-4 phone-sm:mt-1 lapi:mt-4">
           <CartToggleAmount
             amount={amount}
             setDecrease={() => setDecrement(id)}
             setIncrease={() => setIncrement(id)}
           />
+          </p>
         </div>
         <div className="cartitem-delete">
-          <MdDelete className="sm:text-2xl" onClick={() => removeItem(id)} />
+          <MdDelete className="text-2xl" onClick={() => removeItem(id)} />
         </div>
       </div>
     </>

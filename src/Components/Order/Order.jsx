@@ -2,14 +2,14 @@ import React from "react";
 import { useProductContext } from "../../Context/ProductContext";
 import { Layout } from "../Layout/Layout";
 export const Order = () => {
-  const userid = JSON.parse(localStorage.getItem("user")).user.uid;
-  const { order } = useProductContext();
+  // const userid = JSON.parse(localStorage.getItem("user")).user.uid;
+  // const { order } = useProductContext();
   return (
     <Layout>
       <>
-        <div className="grid grid-cols-2 pl-8 mt-10">
+        <div className="lapi:grid lapi:grid-cols-2 lapi:pl-8 mt-6 phone-sm:flex phone-sm:flex-col phone-sm:pl-4">
           <div>
-            <p className="text-4xl">Your Orders</p>
+            <p className="text-3xl">Your Orders</p>
           </div>
           <div className="flex gap-4">
             <input
@@ -17,13 +17,13 @@ export const Order = () => {
               placeholder="search all orders"
               className="pl-3 w-80 h-8 text-blackoutline-none border-none"
             />
-            <button className="bg-black text-white hover:opacity-75 transition-opacity rounded-3xl  text-[14px] h-8 w-32 cursor-pointer">
-              search orders
+            <button className="bg-black text-white hover:opacity-75 transition-opacity rounded-3xl lapi:text-[14px] phone-sm:text-[12px] h-8 w-32 cursor-pointer">
+              search
             </button>
           </div>
         </div>
-        <hr />
-        <div className=" h-full pt-10">
+        <hr className="mt-2"/>
+        {/* <div className=" h-full pt-10">
           {order
             .filter((obj) => obj.userid == userid)
             .map((order) => {
@@ -59,7 +59,7 @@ export const Order = () => {
                 </div>
               );
             })}
-        </div>
+        </div> */}
       </>
     </Layout>
   );

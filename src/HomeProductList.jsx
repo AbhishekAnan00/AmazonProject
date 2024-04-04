@@ -43,36 +43,35 @@ export const HomeProductList = () => {
       id: 7,
       cover:
         "https://images-eu.ssl-images-amazon.com/images/W/MEDIAX_849526-T2/images/G/31/Symbol/2024/GW_Jan/29th/Combo_low_res_2_1_1._SY304_CB583301264_.jpg",
-      title: "Under ₹699 | Combo packs | Amazon brands & more",
+      title: "Under ₹699 | Combo packs | Amazon brands",
     },
     {
       id: 8,
       cover:
         "https://images-eu.ssl-images-amazon.com/images/W/MEDIAX_849526-T2/images/G/31/img17/Home/AmazonTV/Dehati_Ladke/PC_CC/DeskCC-379x304._SY304_CB584616146_.jpg",
-      title: "Season 2 streaming now | Watch now only on miniTV",
+      title: "Season 2 streaming now | Only on miniTV",
     },
   ];
 
   return (
     <>
-      <div className="grid grid-cols-4 md:p-5 2xl:p-12 sm:grid-cols-3 md:grid-cols-4 absolute  2xl:top-[350px] xl:top-[250px] lg:top-[250px] md:top-[200px] sm:top-[120px] sm:gap-12 sm:p-8">
+      <div className="grid grid-cols-4 absolute top-[350px] gap-10 pl-10 phone-sm:grid-cols-4 phone-sm:top-32 phone-sm:pl-1 phone-md:pl-2 phone-lg:pl-3 phone-xl:pl-4 phone-sm:gap-2 lapi:grid-cols-4 lapi:top-[350px] lapi:gap-10 lapi:pl-10">
         {HomeProductList.map((item) => {
           return (
             <div
               key={item.id}
-              className="flex flex-col justify-center sm:h-[100px] sm:w-[100px] md:h-[160px] md:w-[120px] xl:w-[220px] xl:h-[250px] 2xl:w-[300px]
-              2xl:h-[300px] md:gap-1 sm:p-2 sm:gap-0 md:p-2 lg:p-2 lg:h-[200px] lg:w-[200px] h-80 w-66 sm:mb-0 mb-2 shadow-lg bg-white 2xl:p-5 gap-2"
+              className="flex flex-col justify-center h-96 w-96 shadow-lg bg-white gap-2 p-4 phone-sm:h-20 phone-sm:w-20 phone-sm:p-1 phone-sm:gap-0 lapi:h-96 lapi:w-96 lapi:p-4 lapi:gap-12"
             >
-              <p className="text-{black} sm:text-[5px] sm:font-normal  md:text-[8px] md:font-bold lg:text-[10px] xl:text-[14px]">
+              <p className="text-black font-semibold text-lg phone-sm:h-4 phone-sm:mb-2 phone-sm:w-full phone-sm:text-[5px] lapi:text-lg lapi:h-0">
                 {item.title}
               </p>
               <img
                 src={item.cover}
                 alt={item.title}
-                className="sm:w-full sm:h-40 2xl:w-80 2xl:h-80 object-contain"
+                className="phone-sm:h-10 lapi:h-60" 
               />
-              <Link to="/products">
-                <p className=" text-teal-500 sm:text-[8px] md:text-[10px] lg:text-[14px] xl:text-[16px]">
+              <Link to="/products"> 
+                <p className=" text-teal-500 phone-sm:text-[4px] phone-sm:mt-1 lapi:text-[20px] lapi:mt-0">
                   See more
                 </p>
               </Link>

@@ -87,8 +87,8 @@ export const Cart = () => {
   return (
     <>
       <Layout>
-        <div className="cartitem-cart bg-white shadow-lg sm:mt-60">
-          <p className="font-semibold text-2xl">Shopping Cart</p>
+        <div className="cartitem-cart bg-white shadow-lg pl-10 pt-4 phone-sm:pl-2 lapi:pl-10">
+          <p className="font-bold text-3xl">Shopping Cart</p>
           {cart.map((curElem) => {
             return <CartItem key={curElem.id} {...curElem} />;
           })}
@@ -108,7 +108,7 @@ export const Cart = () => {
             Clear Cart
           </button>
         </div>
-        <div className="sm:absolute sm:top-20 sm:bg-white sm:shadow-lg p-4 sm:w-full">
+        <div className="p-4 w-96 text-xl lapi:right-0 lapi:top-32 lapi:absolute phone-sm:block phone-sm:w-full lapi:w-96">
           <div className="flex justify-between mb-1">
             <p>subtotal:</p>
             <p>

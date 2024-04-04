@@ -35,8 +35,8 @@ export const SingleProduct = () => {
   }
   return (
     <Layout>
-      <div className="sm:p-2">
-        <div className="sm:grid sm:grid-rows-2">
+      <div className="mt-6">
+        <div className="lapi:grid lapi:grid-cols-2 phone-sm:flex phone-sm:flex-col">
           {/* product image */}
           <div className="">
             <Images Imgs={image} />

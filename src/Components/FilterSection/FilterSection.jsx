@@ -27,7 +27,7 @@ export const FilterSection = () => {
   const getColorsData = getUniqueData(allProducts, "colors");
   return (
     <>
-      <div className="filter-section mt-10 max-w-20 pl-4">
+      <div className="filter-section mt-6 max-w-20">
         <div>
           <form onSubmit={(e) => e.preventDefault()}>
             <input
@@ -36,12 +36,12 @@ export const FilterSection = () => {
               value={text}
               onChange={updateFilterValue}
               placeholder="Search Products"
-              className="search-product border-none outline-none p-[5px] w-60 rounded-lg cursor-pointer sm:w-40 md:w-44 lg:w-52"
+              className="search-product border-none outline-none p-[5px] lapi:w-60 rounded-lg cursor-pointer phone-sm:w-40"
             />
           </form>
         </div>
 
-        <div className="category">
+        <div className="category lapi:text-xl phone-sm:text-md">
           <p className="mb-3 mt-4 text-black-500 font-semibold">Category</p>
           {getCategoryData.map((curElem, index) => {
             return (
@@ -58,11 +58,11 @@ export const FilterSection = () => {
             );
           })}
         </div>
-        <div className="company">
+        <div className="company lapi:text-xl phone-sm:text-md">
           <p className="mb-3 mt-3 text-black-500 font-semibold">Company</p>
           {getCompanyData.map((curElem, index) => {
             return (
-              <div className="flex">
+              <div className="flex gap-4">
                 <input
                   type="checkbox"
                   key={index}
@@ -75,7 +75,7 @@ export const FilterSection = () => {
             );
           })}
         </div>
-        <div className="color w-60">
+        <div className="color w-80 lapi:text-xl phone-sm:text-md">
           <p className="mb-4 mt-3 text-black-500 font-semibold">Colors</p>
           {getColorsData.map((curColor, index) => {
             return (
@@ -86,7 +86,7 @@ export const FilterSection = () => {
                 name="color"
                 style={{ backgroundColor: curColor }}
                 onClick={updateFilterValue}
-                className="w-4 h-4 rounded-full mr-1"
+                className="lapi:w-6 lapi:h-6 rounded-full lapi:mr-2 phone-sm:w-4 phone-sm:h-4 phone-sm:mr-1"
               >
                 {color === curColor ? (
                   <IoIosCheckmark className="text-white" />
@@ -98,7 +98,7 @@ export const FilterSection = () => {
 
         <button
           onClick={ResetFilter}
-          className="border bg-primary text-black  hover:opacity-75 transition-opacity rounded-lg font-semibold p-[4px] w-32 mt-5 cursor-pointer"
+          className="border bg-primary text-black  hover:opacity-75 transition-opacity rounded-lg font-semibold p-[4px] lapi:w-32 mt-5 cursor-pointer phone-sm:w-24"
         >
           Reset
         </button>

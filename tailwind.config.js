@@ -4,13 +4,14 @@ export default {
   theme: {
     extend: {
       screens: {
-        'sm': '280px',
-        'md': '570px',
-        'lg': '774px',
-        'xl': '1080px',
-        "2xl": "1136px",
+        'phone-sm': '280px',
+        'phone-md': '320px',
+        'phone-lg': '360px',
+        'phone-xl': '420px',
+        "lapi": "425px",
       },
     },
   },
   plugins: [],
 };
+

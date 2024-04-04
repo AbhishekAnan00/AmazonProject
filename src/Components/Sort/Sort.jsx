@@ -7,29 +7,32 @@ export const Sort = () => {
     useFilterContext();
   return (
     <div
-      className="sm:ml-32 sm:grid 
-    sm:grid-cols-2 sm:text-[10px] sm:mt-5"
+      className="flex justify-between text-[20px] mt-6"
     >
       {/* 1st column */}
-      <div className=" text-2xl md:absolute md:left-64">
-        <button className="md:mt-4 sm:mr-2" onClick={setGridView}>
-          <IoGrid className="grid-icon sm:text-[20px] md:text-[26px]" />
+      <div className="text-3xl flex gap-8">
+        <div>
+        <button onClick={setGridView}>
+          <IoGrid className="grid-ico phone-sm:hidden lapi:block" />
         </button>
+        </div>
+        <div>
         <button onClick={setListView}>
-          <FaThList className="list-icon sm:text-[20px] md:text-[26px]" />
+          <FaThList className="list-icon phone-sm:hidden lapi:block" />
         </button>
+        </div>
       </div>
       {/* 2nd column */}
-      <div className="sort-product-count hidden">
+      <div className="sort-product-count phone-sm:hidden lapi:block">
         {`${filterProducts.length}`} Products Available
       </div>
       {/* 3rd colmn */}
       <div>
         <form
           action="#"
-          className=" md:relative md:top-[20px] md:ml-80 md:text-[12px] md:w-32 lg:relative lg:ml-96 sm:relative sm:mt-3  sm:w-40  xl:relative xl:left-[180px] 2xl:left-[200px]"
+          className="text-[16px] flex w-40"
         >
-          <label htmlFor="sort" className="bg-white p-1 rounded-lg">
+          <label htmlFor="sort" className="bg-white p-1 rounded-lg flex">
             Sort by :
             <select id="sort" className=" outline-none" onClick={sorting}>
               <option value="lowest">lowest</option>

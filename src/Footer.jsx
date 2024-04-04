@@ -1,24 +1,23 @@
-import React, { useContext } from "react";
+import React from "react";
 import amazon_logo from "./assets/amazon_logo.png";
 
 export const Footer = () => {
-
-  const backtotop = () => {
-    window.scroll(0, 0);
-  };
+    const backtotop = () => {
+    window.scroll(0, 0)
+  }
   return (
-    <div className="footer mt-[420px] md:mt-[350px] xl:mt-[540px]">
-      <div className="footer-panel-1  text-center text-white bg-slate-500 hover:bg-slate-400 p-4">
-        <p onClick={backtotop} className=" cursor-pointer sm:text-sm ">Back to top</p>
+    <div className="footer mt-[420px] phone-sm:mt-[150px] lapi:mt-[420px]">
+      <div className="footer-panel-1  text-center text-white bg-slate-800 hover:bg-slate-900 p-4">
+        <p onClick={backtotop} className=" cursor-pointer font-semibold phone-sm:text-xs lapi:text-xl">Back to top</p>
       </div>
-      <div className="footer-panel-2 grid grid-cols-4 sm:p-5 sm:grid-cols-2  lg:grid lg:p-10 xl:p-14 p-20 gap-10 bg-slate-700 text-white">
+      <div className="footer-panel-2 grid grid-cols-4 p-20 gap-10 bg-slate-700 text-white text-xl phone-sm:grid-cols-2 phone-sm:p-5 phone-sm:gap-5 phone-sm:text-xs lapi:grid-cols-4 lapi:p-20 lapi:gap-10 lapi:text-xl">
         <ul className="flex flex-col">
           <p className="font-bold">Get to Know Us</p>
           <a>About Us</a>
           <a>Careers</a>
           <a>Press Releases</a>
           <a>Amazon Science</a>
-        </ul>
+        </ul> 
         <ul className="flex flex-col">
           <p className="font-bold">Connect with Us</p>
           <a>Facebook</a>
@@ -46,18 +45,18 @@ export const Footer = () => {
           <a>Help</a>
         </ul>
       </div>
-      <div className="footer-panel-3 flex justify-center bg-slate-700 border-t-2 p-2 ">
+      <div className="footer-panel-3 flex justify-center bg-slate-700 border-t-2 p-2">
         <img src={amazon_logo} alt="amazon" className="h-10 w-20" />
       </div>
       <div className="footer-panel-4">
         <div className="copyright-notice flex gap-2 justify-center bg-slate-800 text-white p-1">
-          <div className="text-[14px] sm:text-[14px]">
+          <div className="text-[14px] phone-sm:text-xs lapi:text-[14px]">
             <a>Conditions of Use & Sales</a>
             <a>Privacy Notice</a>
             <a>Interest Based-Ads</a>
           </div>
         </div>
-        <div className="copyright text-center gap-2 bg-slate-800 text-white text-[14px] sm:text-[12px]">
+        <div className="copyright text-center gap-2 bg-slate-800 text-white text-[14px] phone-sm:text-xs lapi:text-[14px]">
           © 1996-2024, Amazon.com, Inc. or its affiliates
         </div>
       </div>

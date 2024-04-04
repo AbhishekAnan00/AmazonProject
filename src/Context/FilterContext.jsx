@@ -1,13 +1,13 @@
-import { createContext, useContext , useEffect , useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import { useProductContext } from "./ProductContext";
-import reducer from '../Reducer/FilterReducer'
+import reducer from "../Reducer/FilterReducer";
 
-const FilterContext = createContext()
+const FilterContext = createContext();
 
 const initialState = {
   filterProducts: [],
   allProducts: [],
-  gridView: false,
+  gridView: true,
   sortingValue: "lowest",
   filters: {
     text: "",
@@ -15,9 +15,9 @@ const initialState = {
     company: "",
     color: "",
   },
-}
+};
 
-export const FilterProvider = ({children}) => {
+export const FilterProvider = ({ children }) => {
   const { products } = useProductContext();
   // console.log(products);
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -31,8 +31,8 @@ export const FilterProvider = ({children}) => {
   const setListView = () => {
     return dispatch({ type: "SET_LIST_VIEW" });
   };
-   //sorting
-   const sorting = (event) => {
+  //sorting
+  const sorting = (event) => {
     const userValue = event.target.value;
     dispatch({ type: "GET_SORT_VALUE", payload: userValue });
   };
@@ -44,8 +44,8 @@ export const FilterProvider = ({children}) => {
   };
   // to the clear filter
   const ResetFilter = () => {
-   dispatch({type: "RESET_FILTER"}) 
-  }
+    dispatch({ type: "RESET_FILTER" });
+  };
   // to sort the product
   useEffect(() => {
     dispatch({ type: "FILTER_PRODUCTS" });
@@ -55,11 +55,24 @@ export const FilterProvider = ({children}) => {
   useEffect(() => {
     dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
-  return <FilterContext.Provider value={{...state,setGridView, setListView,updateFilterValue , ResetFilter , sorting }}>{children}</FilterContext.Provider>
-}
+  return (
+    <FilterContext.Provider
+      value={{
+        ...state,
+        setGridView,
+        setListView,
+        updateFilterValue,
+        ResetFilter,
+        sorting,
+      }}
+    >
+      {children}
+    </FilterContext.Provider>
+  );
+};
 
 //custom hook
 
 export const useFilterContext = () => {
-  return useContext(FilterContext)
-}
+  return useContext(FilterContext);
+};
