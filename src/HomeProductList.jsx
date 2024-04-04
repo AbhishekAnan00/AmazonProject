@@ -55,20 +55,20 @@ export const HomeProductList = () => {
 
   return (
     <>
-      <div className="grid grid-cols-4 absolute top-[350px] gap-10 pl-10 phone-sm:grid-cols-4 phone-sm:top-32 phone-sm:pl-1 phone-md:pl-2 phone-lg:pl-3 phone-xl:pl-4 phone-sm:gap-2 lapi:grid-cols-4 lapi:top-[350px] lapi:gap-10 lapi:pl-10">
+      <div className="grid grid-cols-4 absolute top-[350px] gap-10 pl-10 phone-sm:grid-cols-4 phone-sm:top-32 phone-sm:pl-1 phone-md:pl-2 phone-lg:pl-3 phone-xl:pl-4 phone-sm:gap-2 lapi:grid-cols-4 lapi:top-[350px] lapi:gap-20">
         {HomeProductList.map((item) => {
           return (
             <div
               key={item.id}
-              className="flex flex-col justify-center h-96 w-96 shadow-lg bg-white gap-2 p-4 phone-sm:h-20 phone-sm:w-20 phone-sm:p-1 phone-sm:gap-0 lapi:h-96 lapi:w-96 lapi:p-4 lapi:gap-12"
+              className="flex flex-col justify-center shadow-lg bg-white gap-2 p-4 phone-sm:h-20 phone-sm:w-20 phone-sm:p-1 phone-sm:gap-0 lapi:h-80 lapi:w-72 lapi:p-4 lapi:gap-12"
             >
-              <p className="text-black font-semibold text-lg phone-sm:h-4 phone-sm:mb-2 phone-sm:w-full phone-sm:text-[5px] lapi:text-lg lapi:h-0">
+              <p className="text-black font-semibold text-lg phone-sm:h-4 phone-sm:mb-2 phone-sm:w-full phone-sm:text-[5px] lapi:text-lg">
                 {item.title}
               </p>
               <img
                 src={item.cover}
                 alt={item.title}
-                className="phone-sm:h-10 lapi:h-60" 
+                className="phone-sm:h-10 lapi:h-44 object-fit" 
               />
               <Link to="/products"> 
                 <p className=" text-teal-500 phone-sm:text-[4px] phone-sm:mt-1 lapi:text-[20px] lapi:mt-0">

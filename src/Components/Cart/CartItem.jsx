@@ -9,7 +9,7 @@ export const CartItem = ({ id, name, image, price, amount, color }) => {
 
   return (
     <>
-      <div className="cartitem flex gap-60 mt-8 phone-sm:flex phone-sm:mt-5 phone-sm:gap-6 phone-md:gap-8 phone-lg:gap-10 phone-xl:16 lapi:gap-60 lapi:mt-8 lapi:flex">
+      <div className="cartitem flex gap-60 mt-8 phone-sm:flex phone-sm:mt-5 phone-sm:gap-6 phone-md:gap-8 phone-lg:gap-10 phone-xl:16 lapi:gap-40 lapi:mt-8 lapi:flex">
         <figure className="cartitem-img">
           <img src={image} alt={id} className="h-60 phone-sm:h-20 lapi:h-60"/>
         </figure>

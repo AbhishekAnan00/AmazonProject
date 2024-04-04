@@ -6,7 +6,7 @@ export const Footer = () => {
     window.scroll(0, 0)
   }
   return (
-    <div className="footer mt-[420px] phone-sm:mt-[150px] lapi:mt-[420px]">
+    <div className="footer mt-[420px] phone-sm:mt-[150px] lapi:mt-[520px]">
       <div className="footer-panel-1  text-center text-white bg-slate-800 hover:bg-slate-900 p-4">
         <p onClick={backtotop} className=" cursor-pointer font-semibold phone-sm:text-xs lapi:text-xl">Back to top</p>
       </div>
