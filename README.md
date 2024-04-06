@@ -17,8 +17,4 @@ Details:
 
 https://github.com/AbhishekAnan00/AmazonProject/assets/156063395/44a21087-b843-4c40-8ba2-09ed868bf1a7
 
-#ResponsiveLive
-
-
-https://github.com/AbhishekAnan00/AmazonProject/assets/156063395/c6c4ce48-9bea-4b1a-b620-08785eb00bdd
 
