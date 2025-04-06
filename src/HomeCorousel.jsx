@@ -71,6 +71,8 @@ export const HomeCorousel = () => {
   ];
 
   return (
+
+
     <div className="flex flex-col gap-4 p-6 bg-gray-100 relative top-[750px]">
       <div className="bg-white w-full rounded-md shadow p-4 relative">
         <div className="flex justify-between items-center mb-4">
@@ -118,3 +120,4 @@ export const HomeCorousel = () => {
     </div>
   );
 };
+

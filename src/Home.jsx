@@ -68,10 +68,10 @@ export const Home = () => {
             <MdKeyboardArrowRight />
           </div>
         </div>
-
-        <HomeProductList />
-        <HomeCorousel/>
+<HomeProductList />
+<HomeCorousel/>
       </Layout>
     </>
   );
 };
+
