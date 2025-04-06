@@ -1,25 +1,27 @@
-import React from 'react'
+import React from 'react';
 import { useProductContext } from '../../Context/ProductContext';
 import { Product } from './Product';
 
 export const FeatureProduct = () => {
-  const { isLoading , featureProducts } = useProductContext();
-  // console.log(featureProducts);
-  if(isLoading){
-    return <div>.....loading</div>
+  const { isLoading, featureProducts } = useProductContext();
+
+  if (isLoading) {
+    return <div className="text-center py-10 text-xl font-medium">...loading</div>;
   }
+
   return (
-    <div className="section bg-slate-300">
-    <div className="container ml-10">
-      <div className="heading text-center text-2xl">our feature services</div>
-      <div className="grid grid-cols-3 gap-10 absolute top-[350px]">
-        {
-          featureProducts.map((curElem) => {
-            return <Product key={curElem.id} {...curElem}/>
-          })
-        }
+    <section className="bg-slate-100 py-12">
+      <div className="container mx-auto px-4">
+        <h2 className="text-center text-3xl font-bold mb-10 text-gray-800">
+          Our Feature Services
+        </h2>
+
+        <div className="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+          {featureProducts.map((curElem) => (
+            <Product key={curElem.id} {...curElem} />
+          ))}
+        </div>
       </div>
-    </div>
-  </div>
-  )
-}
+    </section>
+  );
+};

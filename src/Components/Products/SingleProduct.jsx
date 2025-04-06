@@ -29,35 +29,41 @@ export const SingleProduct = () => {
 
   useEffect(() => {
     getSingleProduct(`${API}?id=${id}`);
-  }, []);
+  }, [id]);
+
   if (isSingleLoading) {
     return <div>...loading</div>;
   }
+
   return (
     <Layout>
-      <div className="mt-6">
-        <div className="lapi:grid lapi:grid-cols-2 phone-sm:flex phone-sm:flex-col">
+      <div className="mt-6 px-4 md:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* product image */}
-          <div className="">
+          <div>
             <Images Imgs={image} />
           </div>
+
           {/* product-data */}
-          <div className="single-product-data">
-            <b>{name}</b>
+          <div className="space-y-4">
+            <h1 className="text-2xl font-bold">{name}</h1>
             <Stars stars={stars} reviews={reviews} />
-            <p className="product-data-price">
-              <b>MRP</b> :
-              <del>
-                <FormatPrice price={price + 250000} />
-              </del>
+
+            <p className="text-gray-700">
+              <b>MRP:</b> <del><FormatPrice price={price + 250000} /></del>
             </p>
-            <p>
-              <b> Deal of the Day : </b> <FormatPrice price={price} />
-              <p>{description}</p>
+
+            <p className="text-gray-900">
+              <b>Deal of the Day:</b> <FormatPrice price={price} />
             </p>
-            <b>Available : {stock > 0 ? "In Stock" : "Not Available"}</b>
-            <p> Brand : {company}</p>
-            <hr className="mt-5" />
+
+            <p className="text-gray-600">{description}</p>
+
+            <p><b>Available:</b> {stock > 0 ? "In Stock" : "Not Available"}</p>
+            <p><b>Brand:</b> {company}</p>
+
+            <hr className="mt-4" />
+
             {stock > 0 && <AddToCart product={SingleProduct} />}
           </div>
         </div>

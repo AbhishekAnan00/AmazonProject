@@ -10,99 +10,92 @@ export const FilterSection = () => {
     color,
     ResetFilter,
   } = useFilterContext();
-  //get unique data
+
   const getUniqueData = (data, property) => {
-    let newVal = data.map((curElem) => {
-      return curElem[property];
-    });
+    let newVal = data.map((curElem) => curElem[property]);
     if (property === "colors") {
       newVal = newVal.flat();
     }
-    return (newVal = [...new Set(newVal)]);
+    return [...new Set(newVal)];
   };
 
-  //need unique data
   const getCategoryData = getUniqueData(allProducts, "category");
   const getCompanyData = getUniqueData(allProducts, "company");
   const getColorsData = getUniqueData(allProducts, "colors");
+
   return (
-    <>
-      <div className="filter-section mt-6 max-w-20">
-        <div>
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              name="text"
-              value={text}
-              onChange={updateFilterValue}
-              placeholder="Search Products"
-              className="search-product border-none outline-none p-[5px] lapi:w-60 rounded-lg cursor-pointer phone-sm:w-40"
-            />
-          </form>
-        </div>
-
-        <div className="category lapi:text-xl phone-sm:text-md">
-          <p className="mb-3 mt-4 text-black-500 font-semibold">Category</p>
-          {getCategoryData.map((curElem, index) => {
-            return (
-              <button
-                key={index}
-                type="button"
-                name="category"
-                value={curElem}
-                onClick={updateFilterValue}
-                className="flex flex-col mb-1 hover:text-orange-500"
-              >
-                {curElem}
-              </button>
-            );
-          })}
-        </div>
-        <div className="company lapi:text-xl phone-sm:text-md">
-          <p className="mb-3 mt-3 text-black-500 font-semibold">Company</p>
-          {getCompanyData.map((curElem, index) => {
-            return (
-              <div className="flex gap-4">
-                <input
-                  type="checkbox"
-                  key={index}
-                  name="company"
-                  value={curElem}
-                  onClick={updateFilterValue}
-                />
-                <span>{curElem}</span>
-              </div>
-            );
-          })}
-        </div>
-        <div className="color w-80 lapi:text-xl phone-sm:text-md">
-          <p className="mb-4 mt-3 text-black-500 font-semibold">Colors</p>
-          {getColorsData.map((curColor, index) => {
-            return (
-              <button
-                key={index}
-                type="button"
-                value={curColor}
-                name="color"
-                style={{ backgroundColor: curColor }}
-                onClick={updateFilterValue}
-                className="lapi:w-6 lapi:h-6 rounded-full lapi:mr-2 phone-sm:w-4 phone-sm:h-4 phone-sm:mr-1"
-              >
-                {color === curColor ? (
-                  <IoIosCheckmark className="text-white" />
-                ) : null}
-              </button>
-            );
-          })}
-        </div>
-
-        <button
-          onClick={ResetFilter}
-          className="border bg-primary text-black  hover:opacity-75 transition-opacity rounded-lg font-semibold p-[4px] lapi:w-32 mt-5 cursor-pointer phone-sm:w-24"
-        >
-          Reset
-        </button>
+    <div className="filter-section p-4 max-w-xs w-full">
+      <div>
+        <form onSubmit={(e) => e.preventDefault()}>
+          <input
+            type="text"
+            name="text"
+            value={text}
+            onChange={updateFilterValue}
+            placeholder="Search Products"
+            className="w-full border border-gray-300 outline-none px-3 py-2 rounded-md text-sm"
+          />
+        </form>
       </div>
-    </>
+
+      <div className="mt-6">
+        <p className="mb-3 font-semibold text-gray-800 text-base">Category</p>
+        {getCategoryData.map((curElem, index) => (
+          <button
+            key={index}
+            type="button"
+            name="category"
+            value={curElem}
+            onClick={updateFilterValue}
+            className="block mb-2 text-sm text-gray-600 hover:text-orange-500"
+          >
+            {curElem}
+          </button>
+        ))}
+      </div>
+
+      <div className="mt-6">
+        <p className="mb-3 font-semibold text-gray-800 text-base">Company</p>
+        {getCompanyData.map((curElem, index) => (
+          <label key={index} className="flex items-center gap-2 mb-2 text-sm">
+            <input
+              type="checkbox"
+              name="company"
+              value={curElem}
+              onClick={updateFilterValue}
+            />
+            <span>{curElem}</span>
+          </label>
+        ))}
+      </div>
+
+      <div className="mt-6">
+        <p className="mb-3 font-semibold text-gray-800 text-base">Colors</p>
+        <div className="flex flex-wrap gap-2">
+          {getColorsData.map((curColor, index) => (
+            <button
+              key={index}
+              type="button"
+              value={curColor}
+              name="color"
+              style={{ backgroundColor: curColor }}
+              onClick={updateFilterValue}
+              className="w-6 h-6 rounded-full flex items-center justify-center"
+            >
+              {color === curColor ? (
+                <IoIosCheckmark className="text-white text-lg" />
+              ) : null}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <button
+        onClick={ResetFilter}
+        className="mt-6 w-full py-2 px-4 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm font-medium"
+      >
+        Reset
+      </button>
+    </div>
   );
 };

@@ -1,131 +1,303 @@
-import React from "react";
+import React, { useState, useMemo, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 import amazon_logo from "./assets/amazon_logo.png";
 import { MdLocationPin } from "react-icons/md";
 import { IoSearch } from "react-icons/io5";
 import { LiaShoppingCartSolid } from "react-icons/lia";
-import { Link } from "react-router-dom";
 import { useCartContext } from "./Context/CartContext";
 import { useFilterContext } from "./Context/FilterContext";
 
 export const Header = () => {
   const { totalItem } = useCartContext();
-  //search
-  const {
-    updateFilterValue,
-    filters: { text },
-    allProducts,
-  } = useFilterContext();
+  const { allProducts } = useFilterContext();
+  const navigate = useNavigate();
 
-  //to category with option
-  const getUniqueData = (data, property) => {
-    let newVal = data.map((curElem) => {
-      return curElem.company;
-    });
-    return (newVal = [...new Set(newVal)]);
-  };
-  const getCompanyData = getUniqueData(allProducts);
-  //user
   const user = JSON.parse(localStorage.getItem("user"));
-  console.log(user?.user?.email);
-  //user logout
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+
+  const debouncedSearch = useMemo(
+    () =>
+      debounce((searchTerm) => {
+        if (searchTerm.trim() === "") {
+          setSuggestions([]);
+          return;
+        }
+        const filtered = allProducts.filter((product) =>
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        setSuggestions(filtered);
+      }, 300),
+    [allProducts]
+  );
+
+  useEffect(() => {
+    debouncedSearch(query);
+  }, [query, debouncedSearch]);
+
+  const handleSuggestionClick = (id) => {
+    setQuery("");
+    setSuggestions([]);
+    navigate(`/singleproduct/${id}`);
+  };
+
   const logout = () => {
-    localStorage.clear("user");
+    localStorage.removeItem("user");
     window.location.href = "/signin";
   };
+
   return (
-    <div className="header">
-      <nav className="flex justify-evenly items-center bg-secondary text-white p-1">
-        <div>
-          <Link to="/">
-            <img
-              src={amazon_logo}
-              alt="logo"
-              className="nav-logo h-16 hover:border cursor-pointer phone-sm:hidden lapi:block"
-            />
-          </Link>
-        </div>
-        <div className="nav-location flex flex-col hover:border phone-sm:hidden lapi:block">
-          <div>
-            <p className="text-[12px]">Delivery</p>
-          </div>
-          <div>
+    <header className="bg-secondary text-white shadow-sm">
+      <nav className="max-w-[1440px] mx-auto px-4 py-2 flex flex-wrap items-center justify-between relative">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src={amazon_logo} alt="Amazon Logo" className="h-12" />
+        </Link>
+
+        {/* Location */}
+        <div className="hidden lg:flex flex-col justify-center items-start text-sm hover:border px-2 cursor-pointer">
+          <p>Deliver to</p>
+          <div className="flex items-center gap-1">
             <MdLocationPin />
-          </div>
-          <div>
-            <p className="font-bold">india</p>
+            <p className="font-bold">India</p>
           </div>
         </div>
-        <div className="nav-search flex outline-none border-2 rounded-lg bg-white border-transparent hover:border-orange-400">
-          <select
-            className="nav-select h-full  p-2 w-14 bg-slate-200 font-poppin text-black outline-none border-none rounded-tl-md rounded-bl-md cursor-pointer phone-sm:hidden lapi:block"
-            onClick={updateFilterValue}
-            name="company"
-          >
-            <option>All</option>
-            {getCompanyData.map((curElem, index) => {
-              return (
-                <option key={index} value={curElem}>
-                  {curElem}
-                </option>
-              );
-            })}
-          </select>
 
-          <input
-            type="text"
-            name="text"
-            value={text}
-            onChange={updateFilterValue}
-            placeholder="Search Amazon.in"
-            className="w-[600px] font-poppin text-black pl-2 outline-none border-none cursor-pointer phone-sm:w-[150px] phone-md:w-[160px] phone-lg:w-[180px] phone-xl:w-[200px] lapi:w-[600px] phone-sm:rounded-bl-md phone-sm:rounded-tl-md"
-          />
-
-          <div className="nav-search-icon w-10 bg-orange-300 flex items-center justify-center text-2xl text-black rounded-tr-md rounded-br-md cursor-pointer">
-            <IoSearch />
+        {/* Search with Suggestions */}
+        <div className="flex-1 mx-4 max-w-[800px] w-full relative z-50">
+          <div className="flex bg-white rounded-lg overflow-hidden">
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search Amazon.in"
+              className="flex-1 px-3 py-2 text-black outline-none"
+            />
+            <div className="bg-orange-300 text-black px-4 flex items-center justify-center cursor-pointer">
+              <IoSearch className="text-xl" />
+            </div>
           </div>
+
+          {suggestions.length > 0 && (
+            <ul className="absolute top-full left-0 right-0 bg-white text-black border border-gray-300 rounded-b-md shadow-lg max-h-60 overflow-y-auto">
+              {suggestions.map((product) => (
+                <li
+                  key={product.id}
+                  className="px-4 py-2 hover:bg-gray-100 flex items-center gap-3 cursor-pointer"
+                  onClick={() => handleSuggestionClick(product.id)}
+                >
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-10 w-10 object-contain rounded"
+                  />
+                  <span>{product.name}</span>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-        <div className="hover:border flex gap-2 phone-sm:hidden lapi:block">
+
+        {/* Language */}
+        <div className="hidden lg:flex items-center gap-2 hover:border px-2 cursor-pointer">
           <img
             src="https://www.sic-info.org/wp-content/uploads/2014/01/in.png"
             alt="flag"
+            className="h-5"
           />
           <p className="font-bold">EN</p>
         </div>
 
-        <div className="nav-logout hover:border text-lg cursor-pointer phone-sm:text-sm lapi:text-lg">
+        {/* Account */}
+        <div className="text-sm hover:border px-2 cursor-pointer">
           {user ? (
-            <p onClick={logout} className="logout">
-              Hello , Logout
-            </p>
+            <div onClick={logout}>
+              <p>Hello, {user.user.displayName || "User"}</p>
+              <p className="font-bold hidden lg:block">Logout</p>
+            </div>
           ) : (
             <Link to="/signin">
-              <p>
-                <span> Hello,SignIn</span>
-              </p>
+              <p>Hello, Sign In</p>
+              <p className="font-bold hidden lg:block">Account & Lists</p>
             </Link>
           )}
-          <p className="font-bold phone-sm:hidden lapi:block">
-            Account & lists
-          </p>
         </div>
-        <Link to="/order">
-          <div className="nav-order hover:border text-lg cursor-pointer phone-sm:hidden lapi:block">
-            <p className="font-bold">Return</p>
-            <p>& Orders</p>
-          </div>
+
+        {/* Orders */}
+        <Link
+          to="/order"
+          className="hidden lg:block hover:border px-2 cursor-pointer text-sm"
+        >
+          <p className="font-bold">Returns</p>
+          <p>& Orders</p>
         </Link>
-        <div className="nav-cart hover:border flex items-center cursor-pointer">
-          <Link to="/cart">
-            <LiaShoppingCartSolid className="nav-cart-icon text-5xl cursor-pointer phone-sm:text-2xl phone-md:text-2xl phone-lg:text-3xl phone-xl:3xl lapi:text-5xl" />
-          </Link>
-          <p className="mt-4 font-bold text-xl phone-sm:text-sm lapi:text-xl">
-            Cart
-          </p>
-          <p className="cart-count relative top-[-12px] right-8 text-xl  text-orange-400 phone-sm:text-sm lapi:text-xl">
+
+        {/* Cart */}
+        <Link
+          to="/cart"
+          className="relative flex items-center hover:border px-2 cursor-pointer"
+        >
+          <LiaShoppingCartSolid className="text-3xl lg:text-5xl" />
+          <span className="absolute top-0 left-5 text-orange-400 font-bold text-sm">
             {totalItem}
-          </p>
-        </div>
+          </span>
+          <p className="ml-2 font-bold hidden lg:block">Cart</p>
+        </Link>
       </nav>
-    </div>
+    </header>
   );
 };
+
+
+
+// import React, { useState, useMemo, useEffect } from "react";
+// import { Link, useNavigate } from "react-router-dom";
+// import { debounce } from "lodash";
+// import amazon_logo from "./assets/amazon_logo.png";
+// import { MdLocationPin } from "react-icons/md";
+// import { IoSearch } from "react-icons/io5";
+// import { LiaShoppingCartSolid } from "react-icons/lia";
+// import { useCartContext } from "./Context/CartContext";
+// import { useFilterContext } from "./Context/FilterContext";
+
+// export const Header = () => {
+//   const { totalItem } = useCartContext();
+//   const { allProducts } = useFilterContext();
+//   const navigate = useNavigate();
+
+//   const user = JSON.parse(localStorage.getItem("user"));
+//   const [query, setQuery] = useState("");
+//   const [suggestions, setSuggestions] = useState([]);
+
+//   const debouncedSearch = useMemo(
+//     () =>
+//       debounce((searchTerm) => {
+//         if (searchTerm.trim() === "") {
+//           setSuggestions([]);
+//           return;
+//         }
+//         const filtered = allProducts.filter((product) =>
+//           product.name.toLowerCase().includes(searchTerm.toLowerCase())
+//         );
+//         setSuggestions(filtered);
+//       }, 300),
+//     [allProducts]
+//   );
+
+//   useEffect(() => {
+//     debouncedSearch(query);
+//   }, [query, debouncedSearch]);
+
+//   const handleSuggestionClick = (id) => {
+//     setQuery("");
+//     setSuggestions([]);
+//     navigate(`/singleproduct/${id}`);
+//   };
+
+//   const logout = () => {
+//     localStorage.removeItem("user");
+//     window.location.href = "/signin";
+//   };
+
+//   return (
+//     <header className="bg-secondary text-white shadow-sm w-full">
+//       <nav className="max-w-[1440px] mx-auto px-4 py-2 flex flex-wrap items-center justify-between gap-4">
+//         {/* Logo */}
+//         <Link to="/" className="flex items-center gap-2">
+//           <img src={amazon_logo} alt="Amazon Logo" className="h-10 sm:h-12" />
+//         </Link>
+
+//         {/* Location */}
+//         <div className="flex-col justify-center items-start text-sm hover:border px-2 cursor-pointer hidden md:flex">
+//           <p>Deliver to</p>
+//           <div className="flex items-center gap-1">
+//             <MdLocationPin />
+//             <p className="font-bold">India</p>
+//           </div>
+//         </div>
+
+//         {/* Search with Suggestions */}
+//         <div className="flex-grow w-full md:max-w-[500px] lg:max-w-[700px] relative z-50">
+//           <div className="flex bg-white rounded-lg overflow-hidden">
+//             <input
+//               type="text"
+//               value={query}
+//               onChange={(e) => setQuery(e.target.value)}
+//               placeholder="Search Amazon.in"
+//               className="flex-1 px-3 py-2 text-black outline-none"
+//             />
+//             <div className="bg-orange-300 text-black px-4 flex items-center justify-center cursor-pointer">
+//               <IoSearch className="text-xl" />
+//             </div>
+//           </div>
+
+//           {suggestions.length > 0 && (
+//             <ul className="absolute top-full left-0 right-0 bg-white text-black border border-gray-300 rounded-b-md shadow-lg max-h-60 overflow-y-auto">
+//               {suggestions.map((product) => (
+//                 <li
+//                   key={product.id}
+//                   className="px-4 py-2 hover:bg-gray-100 flex items-center gap-3 cursor-pointer"
+//                   onClick={() => handleSuggestionClick(product.id)}
+//                 >
+//                   <img
+//                     src={product.image}
+//                     alt={product.name}
+//                     className="h-10 w-10 object-contain rounded"
+//                   />
+//                   <span>{product.name}</span>
+//                 </li>
+//               ))}
+//             </ul>
+//           )}
+//         </div>
+
+//         {/* Language Selector */}
+//         <div className="flex items-center gap-2 hover:border px-2 cursor-pointer">
+//           <img
+//             src="https://www.sic-info.org/wp-content/uploads/2014/01/in.png"
+//             alt="flag"
+//             className="h-4 sm:h-5"
+//           />
+//           <p className="font-bold text-sm sm:text-base">EN</p>
+//         </div>
+
+//         {/* Account Section */}
+//         <div className="text-sm hover:border px-2 cursor-pointer">
+//         {user ? (
+//             <div onClick={logout}>
+//               <p>Hello, {user.user.displayName || "User"}</p>
+//               <p className="font-bold hidden lg:block">Logout</p>
+//             </div>
+//           ) : (
+//             <Link to="/signin">
+//               <p>Hello, Sign In</p>
+//               <p className="font-bold hidden lg:block">Account & Lists</p>
+//             </Link>
+//           )}
+//         </div>
+
+//         {/* Orders */}
+//         <Link
+//           to="/order"
+//           className="hover:border px-2 cursor-pointer text-sm"
+//         >
+//           <p className="font-bold">Returns</p>
+//           <p>& Orders</p>
+//         </Link>
+
+//         {/* Cart */}
+//         <Link
+//           to="/cart"
+//           className="relative flex items-center hover:border px-2 cursor-pointer"
+//         >
+//           <LiaShoppingCartSolid className="text-3xl sm:text-4xl lg:text-5xl" />
+//           <span className="absolute top-0 left-5 text-orange-400 font-bold text-sm">
+//             {totalItem}
+//           </span>
+//           <p className="ml-2 font-bold text-sm sm:text-base">Cart</p>
+//         </Link>
+//       </nav>
+//     </header>
+//   );
+// };

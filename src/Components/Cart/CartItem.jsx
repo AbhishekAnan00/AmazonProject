@@ -8,37 +8,40 @@ export const CartItem = ({ id, name, image, price, amount, color }) => {
   const { removeItem, setIncrement, setDecrement } = useCartContext();
 
   return (
-    <>
-      <div className="cartitem flex gap-60 mt-8 phone-sm:flex phone-sm:mt-5 phone-sm:gap-6 phone-md:gap-8 phone-lg:gap-10 phone-xl:16 lapi:gap-40 lapi:mt-8 lapi:flex">
-        <figure className="cartitem-img">
-          <img src={image} alt={id} className="h-60 phone-sm:h-20 lapi:h-60"/>
-        </figure>
-        <div className="cartitem-data text-2xl phone-sm:text-sm lapi:text-2xl">
-          <p className="font-semibold">{name}</p>
-          <p className="mt-4 phone-sm:mt-1">color:</p>
-          <button
-            className="w-5 rounded-full h-5 mt-4 phone-sm:mt-1 lapi:mt-4"
-            style={{
-              backgroundColor: color,
-              color: color,
-            }}
-          ></button>
+    <div className="flex flex-wrap items-center justify-between gap-8 mt-6 p-4 border-b border-gray-200">
 
-          <p className="mt-4 phone-sm:mt-1 lapi:mt-4">
-            <FormatPrice price={price} />
-          </p>
-          <p className="mt-4 phone-sm:mt-1 lapi:mt-4">
-          <CartToggleAmount
-            amount={amount}
-            setDecrease={() => setDecrement(id)}
-            setIncrease={() => setIncrement(id)}
-          />
-          </p>
+      <figure className="w-32 h-32 phone-sm:w-16 phone-sm:h-16 overflow-hidden">
+        <img src={image} alt={name} className="w-full h-full object-contain" />
+      </figure>
+
+      <div className="flex flex-col text-lg phone-sm:text-sm gap-2 flex-1 min-w-[180px]">
+        <p className="font-semibold">{name}</p>
+        <div className="flex items-center gap-2">
+          <span>Color:</span>
+          <span
+            className="w-5 h-5 rounded-full inline-block border border-gray-300"
+            style={{ backgroundColor: color }}
+            aria-label={`Color: ${color}`}
+          ></span>
         </div>
-        <div className="cartitem-delete">
-          <MdDelete className="text-2xl" onClick={() => removeItem(id)} />
-        </div>
+        <p>
+          <FormatPrice price={price} />
+        </p>
+        <CartToggleAmount
+          amount={amount}
+          setDecrease={() => setDecrement(id)}
+          setIncrease={() => setIncrement(id)}
+        />
       </div>
-    </>
+
+ 
+      <button
+        onClick={() => removeItem(id)}
+        className="text-red-600 hover:text-red-800 text-2xl transition"
+        aria-label={`Remove ${name} from cart`}
+      >
+        <MdDelete />
+      </button>
+    </div>
   );
 };

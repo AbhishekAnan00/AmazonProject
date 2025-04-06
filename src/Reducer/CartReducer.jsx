@@ -17,14 +17,12 @@ const CartReducer = (state, action) => {
       cart: [...state.cart, cartProduct],
     };
   }
-  //clear cart button
   if (action.type === "CLEAR_CART"){
     return {
        ...state,
        cart : []
     }
   }
-  //to set increment & decrement
   if (action.type === "SET_DECREMENT") {
     let updatedProduct = state.cart.map((curElem) => {
       if (curElem.id === action.payload) {

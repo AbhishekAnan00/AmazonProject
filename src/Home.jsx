@@ -3,28 +3,28 @@ import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import { Layout } from "./Components/Layout/Layout";
 import { HomeProductList } from "./HomeProductList";
-
+import {HomeCorousel} from "./HomeCorousel"
 export const Home = () => {
   const HeroList = [
     {
       id: 1,
       cover:
-        "https://m.media-amazon.com/images/W/MEDIAX_849526-T2/images/I/81nGHhDBoGL._SX3000_.jpg",
+        "https://images-eu.ssl-images-amazon.com/images/G/31/sthaneka/aprilGW/2x._CB547209600_.jpg",
     },
     {
       id: 2,
       cover:
-        "https://images-eu.ssl-images-amazon.com/images/W/MEDIAX_849526-T2/images/G/31/img22/WLA/2024/Launches24/OnePlus/Buds3/Sale/5499/_tallhero_1500x600._CB582196764_.jpg",
+        "https://images-eu.ssl-images-amazon.com/images/G/31/img21/MA2025/GW/UBS/April/Shoes/Unrec/PC/New/1221._CB546844777_.jpg",
     },
     {
       id: 3,
       cover:
-        "https://images-eu.ssl-images-amazon.com/images/W/MEDIAX_849526-T2/images/G/31/img24/Sports/January/GW/Hacer/5298-Sports---Sleeping-bags-hero--3000-X-1200_1._CB582132030_.jpg",
+        "https://images-eu.ssl-images-amazon.com/images/G/31/img25/Sports/March/Kidssports_store/GW/Updated/5298_Sports_-_Kids_sports_slam_heros-PC_-_3000x1200._CB547155011_.jpg",
     },
     {
       id: 4,
       cover:
-        "https://images-eu.ssl-images-amazon.com/images/W/MEDIAX_849526-T2/images/G/31/img24/Media/BAU/VDay24_GW_PC_Hero3-PCA-2X_2._CB582173539_.jpg",
+        "https://images-eu.ssl-images-amazon.com/images/G/31/img24/Media/BAU/PC_Hero_2x-toys_1._CB582765723_.jpg",
     },
   ];
 
@@ -40,28 +40,37 @@ export const Home = () => {
   return (
     <>
       <Layout>
-        <div className="home">
+        <div className="relative w-full max-w-screen mx-auto overflow-hidden">
           <div
-            className="left-arrow absolute top-[300px] text-4xl phone-sm:top-20 lapi:top-[300px]"
+            className="absolute top-1/2 left-4 transform -translate-y-1/2 text-4xl z-10 cursor-pointer bg-white rounded-full shadow-md p-1"
             onClick={prevSlide}
           >
             <MdOutlineKeyboardArrowLeft />
           </div>
-          <div className="image">
-            {HeroList.map((item, index) => {
-              return (
-                current === index && <img src={item.cover} key={item.id} />
-              );
-            })}
+
+          <div className="w-full h-auto">
+            {HeroList.map((item, index) => (
+              current === index && (
+                <img
+                  src={item.cover}
+                  key={item.id}
+                  alt={`hero-${index}`}
+                  className="w-full h-auto object-cover rounded"
+                />
+              )
+            ))}
           </div>
+
           <div
-            className="right-arrow absolute top-[300px] left-[97%] text-4xl phone-sm:top-20 phone-sm:left-[90%] lapi:top-[300px] lapi:left-[97%]"
+            className="absolute top-1/2 right-4 transform -translate-y-1/2 text-4xl z-10 cursor-pointer bg-white rounded-full shadow-md p-1"
             onClick={nextSlide}
           >
             <MdKeyboardArrowRight />
           </div>
         </div>
+
         <HomeProductList />
+        <HomeCorousel/>
       </Layout>
     </>
   );

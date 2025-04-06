@@ -1,28 +1,30 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FormatPrice } from "../FormatPrice/FormatPrice";
 
 export const ListView = ({ products }) => {
   return (
-    <div className="listview mt-4 lapi:w-[800px] phone-sm:w-[180px]">
-      {products.map((curElem) => {
-        const { id, name, price, image, description } = curElem;
+    <div className="mt-6 px-4 md:px-8 space-y-6">
+      {products.map((product) => {
+        const { id, name, price, image, description } = product;
         return (
           <div
-            key={curElem.id}
-            className="border border-black-500 items-center flex flex-row mb-6"
+            key={id}
+            className="flex flex-col md:flex-row items-start gap-6 border border-gray-300 p-4 rounded-lg shadow-sm"
           >
-            <figure>
-              <img src={image} alt={name} />
+            <figure className="w-full md:w-1/3">
+              <img src={image} alt={name} className="w-full h-auto object-cover rounded-md" />
             </figure>
-            <div className="listview-container p-5 text-wrap text-left">
-              <p className="mb-5 font-semibold">
-                {description.slice(0, 90)}...
+
+            <div className="flex-1 space-y-3">
+              <p className="text-gray-800">{description.slice(0, 90)}...</p>
+              <h2 className="text-lg font-semibold">{name}</h2>
+              <p className="text-md font-bold">
+                Price: <FormatPrice price={price} />
               </p>
-              <p className="mb-5">{name}</p>
-              <p className="mb-5 font-semibold">Price:{price}</p>
               <Link to={`/singleproduct/${id}`}>
-                <button className="mb-5 font-semibold border bg-primary text-black p-[5px] hover:opacity-75 transition-opacity rounded-lg cursor-pointer">
-                  read more
+                <button className="mt-2 bg-primary text-black px-4 py-2 rounded hover:opacity-80 transition">
+                  Read More
                 </button>
               </Link>
             </div>
